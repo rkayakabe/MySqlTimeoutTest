@@ -1,0 +1,27 @@
+name: mysql-timeout-test-dotnet6
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run MySql
+      run: docker compose up -d
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies .NET
+      run: dotnet restore
+    - name: Build .NET
+      run: dotnet build --no-restore
+    - name: Test DotNet6
+      run: dotnet test DotNet6/DotNet6.csproj --no-build --verbosity normal
