@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  mysql-timeout-test-dotnet8:
 
     runs-on: ubuntu-latest
 
